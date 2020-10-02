@@ -6,7 +6,6 @@ import java.io.StringReader;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
@@ -36,6 +35,15 @@ public class XMLController {
 				marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 				marshal.marshal(response, res.getOutputStream());
 			break;
+			default:
+				PrintResponse failResponse = new PrintResponse();
+				failResponse.setStatus("Failed.");
+				failResponse.setMessage("Invalid Command.");
+				JAXBContext failContext = JAXBContext.newInstance(PrintResponse.class);
+				Marshaller failMarshal = failContext.createMarshaller();
+				failMarshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				failMarshal.marshal(failResponse, res.getOutputStream());
+				
 		}
 	}
 	

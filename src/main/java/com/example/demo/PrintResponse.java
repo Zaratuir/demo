@@ -8,11 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name="Response")
-@XmlType(propOrder = { "status", "ticketid", "datetime"})
+@XmlType(propOrder = { "status", "ticketid", "message", "datetime"})
 public class PrintResponse {
 	private String status;
 	private String ticketid;
 	private Date datetime;
+	private String message;
 	public PrintResponse() {
 		
 	}
@@ -41,6 +42,13 @@ public class PrintResponse {
 	}
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
+	}
+	@XmlElement(name="message")
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }
